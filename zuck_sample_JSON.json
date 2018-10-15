@@ -1,0 +1,22 @@
+{"transcript":
+{
+  "metadata":
+  {
+    "record_id": "2018:076",
+  "title": "ABCDE",
+  "description": "blah, blah, blah",
+  "record_type": "social media post",
+  "url": "facebook.com",
+  "participants": ["PC", "MZ", "MZ","Sheryl Sandberg"]
+},
+  "contents": [
+    {"MZ": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur non vulputate orci.
+    Fusce at maximus metus. Integer velit ante, dapibus at nibh vel, laoreet bibendum lacus. "},
+    {"PC": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Curabitur non vulputate orci. Fusce at maximus metus. Integer velit ante, dapibus at nibh vel, laoreet bibendum lacus. "}
+    {"Sheryl Sandberg": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      Curabitur non vulputate orci. Fusce at maximus metus. Integer velit ante, dapibus at nibh vel, laoreet bibendum lacus. "}
+
+
+  ]}
+}
