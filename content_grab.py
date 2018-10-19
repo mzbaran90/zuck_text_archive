@@ -6,7 +6,7 @@ os.chdir('/Users/MasonBaran/Desktop')
 ##creates list of lines as to iterate through to fine participants names
 line_list = []
 i = 0
-with open('sample_content.txt','r', encoding='utf-8') as inFile:
+with open('2018-028.txt','r', encoding='utf-8') as inFile:
     for line in inFile.readlines():
         i += 1
         if line.isspace():
@@ -33,7 +33,7 @@ for line in line_list:
         if '##' in result:
             resultStr = result
             no_hash = resultStr.replace('##', '')
-            print(no_hash)
+
             participant[no_hash] = ""
         list_of_participants.append(participant)
 
@@ -51,10 +51,28 @@ for line in line_list:
 
 split_contents = contents_with_splitStr.split(splitStr)
 
-for line in split_contents:
-    for participant in list_of_participants:
-        for key, value in participant.items():
-            participant[key] = line
+print(split_contents[1])
+stopper = 0
+i = 0
+index = 1
+
+for participant in list_of_participants:
+    if i > stopper:
+        stopper += 1
+    for line in split_contents[index]:
+
+        if i > stopper:
+            break
+        elif i == stopper:
+            for key, value in participant.items():
+                print(key + ':' + split_contents[index] + '\n')
+                participant[key] = split_contents[index]
+                index += 1
+                i += 1
+                break
+
+
+
 print(list_of_participants)
 
 
