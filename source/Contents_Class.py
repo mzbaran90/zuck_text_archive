@@ -22,9 +22,11 @@ class Contents(object):
 
         line_list = []
         index = 0
+        pos = 0
 
         with open(self.file,'r', encoding='utf-8') as inFile:
             for line in inFile.readlines():
+
                 index += 1
                 if line.isspace():
                     index -= 1
@@ -35,7 +37,7 @@ class Contents(object):
                         pos = index
 
 
-            return line_list[pos:]      #line_list is now comprised of everything ##contents## on
+        return line_list[pos:]      #line_list is now comprised of everything ##contents## on
 
 
 
