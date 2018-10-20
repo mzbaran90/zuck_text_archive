@@ -1,7 +1,7 @@
 import os
 import re
 
-os.chdir('/Users/MasonBaran/Desktop/zuck_txt_testing')
+
 
 class Contents(object):
 
