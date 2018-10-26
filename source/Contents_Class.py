@@ -30,18 +30,25 @@ class Contents():
             names[index] = re.sub('[##]*','', name)
 
         utterances = re.split(regex, contents)
-
         return names, utterances
 
     def assign_key_and_value(self, names, utterances):
-        pass
+        list_of_participants = []
+        for i in range(len(names)):
+            participant = {}
+            participant[names[i]] = utterances[i+1]
+            list_of_participants.append(participant)
+        return list_of_participants
+
+
+
 
     def content_creator(self):
         reader = self.open_file_create_reader_object_instance()
         contents = self.get_contents_index(reader)
         sep_names, sep_utterances = self.isolate_utterances(contents)
         list_of_participant_values = self.assign_key_and_value(sep_names, sep_utterances)
-        self.isolate_utterances(contents)
+
 
 
 
