@@ -17,7 +17,7 @@ def getfiles():
 
 def csv_metadata(filenames):
 
-    listofdict= []
+    list_of_records= []
     fieldnames = ['record_id', 'participants', 'type', 'format', 'date', 'source', 'title', 'description']
 
     with open('zuckerberg.csv', 'r', encoding='utf-8') as infile:
@@ -31,71 +31,41 @@ def csv_metadata(filenames):
                     for name in fieldnames:
                         metadata[name] = row[name]
 
-                    listofdict.append(metadata)
+                    list_of_records.append(metadata)
 
-        return listofdict
+        return list_of_records
 
 
 ##this assigns sub elements to the metadata element from the list of record dictionary
-def xml_create_metadata(listofdicts, filename):
-    for dict in listofdicts:
+def xml_create_metadata(list_of_records, filename):
+    for dict in list_of_records:
 
         if dict['record_id'] == filename:
             root = ET.Element('transcript')
 
             for key, value in dict.items():
-                if key == 'record_id':
-                    record_id = ET.SubElement(root, key)
-                    record_id.text = value
-                if key == 'participants':
-                     participants = ET.SubElement(root, key)
-                     participants.text = value
-                if key == 'type':
-                    record_type = ET.SubElement(root, key)
-                    record_type.text = value
-                if key == 'format':
-                    record_format = ET.SubElement(root, key)
-                    record_format.text = value
-                if key == 'date':
-                    date = ET.SubElement(root, key)
-                    date.text = value
-                if key == 'source':
-                    source = ET.SubElement(root, key)
-                    source.text = value
-                if key == 'title':
-                    title = ET.SubElement(root, key)
-                    title.text = value
-                if key == 'description':
-                    description = ET.SubElement(root, key)
-                    description.text = value
 
-
-
+                key = ET.SubElement(root, key)
+                key.text = value
 
             xmlstr = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
-            print(xmlstr)
             return xmlstr
         
-def xml_create_content(content):
-    root = ET.Element('content')
-    for participant in content:
-        for key, value in participant.items():
-            key = ET.SubElement(root,'participant',attrib={'name': key})
-            key.text = value
-    xmlstr = minidom.parseString(ET.tostring(root)).toprettyxml(indent="   ")
-    print(xmlstr)
-    return xmlstr
+def create_xml_transcript(content):
+    pass
 
 def main():
     files_no_ext = [file.split('.')[0] for file in getfiles()]  # trims file extension so csv record_id can be parsed
 
-    listofdict = csv_metadata(files_no_ext)
+    list_of_records = csv_metadata(files_no_ext)
 #       cycles through each file and calls methods to build metadata and content 
     for single_file in files_no_ext:
-        metadata = xml_create_metadata(listofdict, single_file)
+        metadata = xml_create_metadata(list_of_records, single_file)
         content_instance_create = Contents_Class.Contents(single_file)
         content = content_instance_create.content_creator()
-        combined = xml_create_content(content)
+
+
+
         
 
 
