@@ -15,7 +15,7 @@ class Contents():
 
     def get_contents_index(self, reader):
 
-        reader = self.open_file_create_reader_object_instance()
+        #reader = self.open_file_create_reader_object_instance()
         content_pos = reader.find('##content##') + "##content##".__len__()
 
         return reader[content_pos:]
@@ -47,7 +47,8 @@ class Contents():
         reader = self.open_file_create_reader_object_instance()
         contents = self.get_contents_index(reader)
         sep_names, sep_utterances = self.isolate_utterances(contents)
-        list_of_participant_values = self.assign_key_and_value(sep_names, sep_utterances)
+        list_of_participants = self.assign_key_and_value(sep_names, sep_utterances)
+        return list_of_participants
 
 
 
