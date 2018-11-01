@@ -23,7 +23,7 @@ class xml_builder(object):
                 speaker.text = value
 
         xml_formatted = self.prettyprint(root)
-        print(xml_formatted)
+
         return xml_formatted
 
     def prettyprint(self, root):

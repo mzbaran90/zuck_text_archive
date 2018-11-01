@@ -48,8 +48,8 @@ class Contents():
         contents = self.get_contents_index(reader)
         sep_names, sep_utterances = self.isolate_utterances(contents)
         list_of_participants = self.assign_key_and_value(sep_names, sep_utterances)
-        return list_of_participants
 
+        return list_of_participants
 
 
 
