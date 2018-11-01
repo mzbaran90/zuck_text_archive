@@ -11,13 +11,15 @@ class xml_builder(object):
     def build_xml_transcript(self):
 
         root = ET.Element('transcript')
+        meta_tag = ET.SubElement(root, 'metadata')
         for key, value in self.metadata.items():
-            key = ET.SubElement(root, key)
+            key = ET.SubElement(meta_tag, key)
             key.text = value
 
+        content_tag = ET.SubElement(root, 'contents')
         for participant in self.contents:
             for key, value in participant.items():
-                speaker = ET.SubElement(root, 'participant', attrib={'name': key})
+                speaker = ET.SubElement(content_tag, 'participant', attrib={'name': key})
                 speaker.text = value
 
         xml_formatted = self.prettyprint(root)

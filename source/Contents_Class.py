@@ -36,7 +36,7 @@ class Contents():
         list_of_participants = []
         for i in range(len(names)):
             participant = {}
-            participant[names[i]] = utterances[i+1]
+            participant[names[i]] = utterances[i+1].strip()
             list_of_participants.append(participant)
         return list_of_participants
 
