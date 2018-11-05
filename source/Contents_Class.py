@@ -1,7 +1,6 @@
 import re
 
 
-
 class Contents():
 
     def __init__(self, file):
@@ -16,7 +15,7 @@ class Contents():
     def get_contents_index(self, reader):
 
         content_pos = reader.find('##content##') + "##content##".__len__()
-        print(content_pos)
+
         if content_pos == 10:
             print('check transcript - content not found for %s' % self.file)
             return None
@@ -38,16 +37,18 @@ class Contents():
 
     def assign_key_and_value(self, names, utterances):
         list_of_participants = []
-        if len(names) + 1 != len(utterances):
-            print('names and utterance entries are not syncing up...')
+
+        if len(names) != len(utterances):
+            print('names and utterance entries are not syncing up for file: %s' % self.file)
 
         else:
 
 
             for i in range(len(names)):
                 participant = {}
-                participant[names[i]] = utterances[i+1].strip()
+                participant[names[i]] = utterances[i].strip()
                 list_of_participants.append(participant)
+
             return list_of_participants
 
 
