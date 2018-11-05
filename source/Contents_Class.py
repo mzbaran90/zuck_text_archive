@@ -15,8 +15,11 @@ class Contents():
 
     def get_contents_index(self, reader):
 
-        #reader = self.open_file_create_reader_object_instance()
         content_pos = reader.find('##content##') + "##content##".__len__()
+        print(content_pos)
+        if content_pos == 10:
+            print('check transcript - content not found for %s' % self.file)
+            return None
 
         return reader[content_pos:]
 
@@ -29,25 +32,39 @@ class Contents():
         for index, name in enumerate(names):
             names[index] = re.sub('[##]*','', name)
 
-        utterances = re.split(regex, contents)
+        utterances = [split for split in re.split(regex, contents) if not split.isspace()]
+
         return names, utterances
 
     def assign_key_and_value(self, names, utterances):
         list_of_participants = []
-        for i in range(len(names)):
-            participant = {}
-            participant[names[i]] = utterances[i+1].strip()
-            list_of_participants.append(participant)
-        return list_of_participants
+        if len(names) + 1 != len(utterances):
+            print('names and utterance entries are not syncing up...')
+
+        else:
+
+
+            for i in range(len(names)):
+                participant = {}
+                participant[names[i]] = utterances[i+1].strip()
+                list_of_participants.append(participant)
+            return list_of_participants
 
 
 
 
     def content_creator(self):
-        reader = self.open_file_create_reader_object_instance()
-        contents = self.get_contents_index(reader)
-        sep_names, sep_utterances = self.isolate_utterances(contents)
-        list_of_participants = self.assign_key_and_value(sep_names, sep_utterances)
+        try:
+            reader = self.open_file_create_reader_object_instance()
+            contents = self.get_contents_index(reader)
+            sep_names, sep_utterances = self.isolate_utterances(contents)
+            list_of_participants = self.assign_key_and_value(sep_names, sep_utterances)
+        except UnicodeDecodeError as e:
+            print('something wrong with' + self.file, e)
+            return None
+        except TypeError:
+            return None
+
 
         return list_of_participants
 
